@@ -6,9 +6,10 @@ export default function handler(req, res) {
         return res.status(405).json({ error: "Method not allowed" })
     }
 
-    const auth = req.headers.authorization
+    // ✅ Read x-api-key header (Hackathon requirement)
+    const apiKey = req.headers["x-api-key"]
 
-    if (auth !== `Bearer ${API_KEY}`) {
+    if (apiKey !== API_KEY) {
         return res.status(401).json({ error: "Invalid API key" })
     }
 
